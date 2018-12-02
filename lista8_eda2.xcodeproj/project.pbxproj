@@ -16,6 +16,8 @@
 		CCBCC69C21B46F0700634959 /* Bomb.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBCC69B21B46F0700634959 /* Bomb.swift */; };
 		CCBCC69E21B4768500634959 /* GameLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBCC69D21B4768500634959 /* GameLayer.swift */; };
 		CCBCC6A021B487D100634959 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBCC69F21B487D100634959 /* Queue.swift */; };
+		CCBCC6A221B496AD00634959 /* Explosao.sks in Resources */ = {isa = PBXBuildFile; fileRef = CCBCC6A121B496AC00634959 /* Explosao.sks */; };
+		CCBCC6A421B4978A00634959 /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = CCBCC6A321B4978A00634959 /* fire.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		CCBCC69B21B46F0700634959 /* Bomb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bomb.swift; sourceTree = "<group>"; };
 		CCBCC69D21B4768500634959 /* GameLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLayer.swift; sourceTree = "<group>"; };
 		CCBCC69F21B487D100634959 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		CCBCC6A121B496AC00634959 /* Explosao.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosao.sks; sourceTree = "<group>"; };
+		CCBCC6A321B4978A00634959 /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +69,9 @@
 				CCBCC68321B429B900634959 /* AppDelegate.swift */,
 				CCBCC68921B429B900634959 /* GameScene.swift */,
 				CCBCC69D21B4768500634959 /* GameLayer.swift */,
+				CCBCC6A321B4978A00634959 /* fire.png */,
 				CCBCC68B21B429B900634959 /* GameViewController.swift */,
+				CCBCC6A121B496AC00634959 /* Explosao.sks */,
 				CCBCC68D21B429B900634959 /* Main.storyboard */,
 				CCBCC69021B429BC00634959 /* Assets.xcassets */,
 				CCBCC69221B429BC00634959 /* LaunchScreen.storyboard */,
@@ -136,7 +142,9 @@
 			files = (
 				CCBCC68F21B429B900634959 /* Main.storyboard in Resources */,
 				CCBCC69121B429BC00634959 /* Assets.xcassets in Resources */,
+				CCBCC6A221B496AD00634959 /* Explosao.sks in Resources */,
 				CCBCC69421B429BC00634959 /* LaunchScreen.storyboard in Resources */,
+				CCBCC6A421B4978A00634959 /* fire.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

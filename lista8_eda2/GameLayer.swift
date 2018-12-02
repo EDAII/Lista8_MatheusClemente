@@ -12,10 +12,13 @@ class GameLayer: SKNode {
     
     var bombs: Array<Bomb>
     var adjacencyList: Array<Array<Int>>
+    var burstQueue: Queue<Bomb>
     
     init(size: CGSize) {
         bombs = Array()
         adjacencyList = Array(Array())
+        burstQueue = Queue<Bomb>()
+
         
         super.init()
         
@@ -63,22 +66,37 @@ class GameLayer: SKNode {
             b.visited = false
         }
         
-        
-        
         var toVisit = Queue<Int>()
         toVisit.push(statingVertice)
         bombs[statingVertice].visited = true
-        bombs[statingVertice].colorBlendFactor = 1
+        //bombs[statingVertice].colorBlendFactor = 1
+        burstQueue.push(bombs[statingVertice])
         
         while let newB = toVisit.pop() {
+        
             for v in adjacencyList[newB] {
                 if (!bombs[v].visited) {
                     bombs[v].visited = true
-                    bombs[v].colorBlendFactor = 1
+                    //bombs[v].colorBlendFactor = 1
+                    burstQueue.push(bombs[v])
+
                     toVisit.push(v)
                 }
             }
         }
         
+        burstChain()
+    }
+    
+    func burstChain() {
+        if let b = burstQueue.pop() {
+            b.explode()
+        }
+        print("BUMMM")
+        run(SKAction.wait(forDuration: 0.5)) {
+            if !self.burstQueue.isEmpty {
+                self.burstChain()
+            }
+        }
     }
 }
