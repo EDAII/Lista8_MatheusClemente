@@ -21,6 +21,7 @@
 		CCBCC6A621B4AB3A00634959 /* LevelGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBCC6A521B4AB3A00634959 /* LevelGenerator.swift */; };
 		CCBCC6A821B4BBCC00634959 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBCC6A721B4BBCC00634959 /* MenuScene.swift */; };
 		CCBCC6AE21B4C2C700634959 /* backButton.png in Resources */ = {isa = PBXBuildFile; fileRef = CCBCC6AD21B4C2C700634959 /* backButton.png */; };
+		CCD87F6521B56B0000AB9B96 /* GraphLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD87F6421B56B0000AB9B96 /* GraphLine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		CCBCC6A521B4AB3A00634959 /* LevelGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelGenerator.swift; sourceTree = "<group>"; };
 		CCBCC6A721B4BBCC00634959 /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		CCBCC6AD21B4C2C700634959 /* backButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backButton.png; sourceTree = "<group>"; };
+		CCD87F6421B56B0000AB9B96 /* GraphLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphLine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				CCBCC69221B429BC00634959 /* LaunchScreen.storyboard */,
 				CCBCC69521B429BC00634959 /* Info.plist */,
 				CCBCC69B21B46F0700634959 /* Bomb.swift */,
+				CCD87F6421B56B0000AB9B96 /* GraphLine.swift */,
 				CCBCC69F21B487D100634959 /* Queue.swift */,
 			);
 			path = lista8_eda2;
@@ -172,6 +175,7 @@
 				CCBCC69C21B46F0700634959 /* Bomb.swift in Sources */,
 				CCBCC6A821B4BBCC00634959 /* MenuScene.swift in Sources */,
 				CCBCC68C21B429B900634959 /* GameViewController.swift in Sources */,
+				CCD87F6521B56B0000AB9B96 /* GraphLine.swift in Sources */,
 				CCBCC68421B429B900634959 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

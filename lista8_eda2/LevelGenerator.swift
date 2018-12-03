@@ -23,13 +23,13 @@ class LevelGenerator {
         return bombs
     }
     
-    static func generateGraph0() -> Array<Array<Int>> {
-        var adjacencyList = Array<Array<Int>>()
+    static func generateGraph0() -> Array<Array<GraphLine>> {
+        var adjacencyList = Array<Array<GraphLine>>()
         
         for i in 0...9 {
-            adjacencyList.append(Array<Int>())
+            adjacencyList.append(Array<GraphLine>())
             if i < 9 {
-                adjacencyList[i].append(i+1)
+                adjacencyList[i].append(GraphLine(i+1))
             }
         }
         return adjacencyList
@@ -60,16 +60,16 @@ class LevelGenerator {
         return bombs
     }
     
-    static func generateGraph1() -> Array<Array<Int>>{
+    static func generateGraph1() -> Array<Array<GraphLine>>{
         
-        var adjacencyList = Array<Array<Int>>()
+        var adjacencyList = Array<Array<GraphLine>>()
 
-        adjacencyList.append([1,2])
-        adjacencyList.append([3, 4])
-        adjacencyList.append([5, 6])
+        adjacencyList.append([GraphLine(1),GraphLine(2)])
+        adjacencyList.append([GraphLine(3),GraphLine(4)])
+        adjacencyList.append([GraphLine(5),GraphLine(6)])
         
         for _ in 1...4 {
-            adjacencyList.append(Array<Int>())
+            adjacencyList.append(Array<GraphLine>())
         }
         
         return adjacencyList
@@ -122,15 +122,16 @@ class LevelGenerator {
         return bombs
     }
     
-    static func generateGraph2() -> Array<Array<Int>>{
+    static func generateGraph2() -> Array<Array<GraphLine>>{
         
-        var adjacencyList = Array<Array<Int>>()
+        var adjacencyList = Array<Array<GraphLine>>()
         
         for _ in 1...9 {
-            adjacencyList.append(Array<Int>())
+            adjacencyList.append(Array<GraphLine>())
         }
-        
-        adjacencyList[0].append(contentsOf: [1,2,3,4,5,6,7,8])
+        for n in 1...8 {
+            adjacencyList[0].append(GraphLine(n))
+        }
         
         return adjacencyList
     }

@@ -12,7 +12,7 @@ class GameLayer: SKNode {
     
     let size: CGSize
     var bombs: Array<Bomb>
-    var adjacencyList: Array<Array<Int>>
+    var adjacencyList: Array<Array<GraphLine>>
     var burstQueue: Queue<Array<Bomb>>
     var lines: Array<SKShapeNode>
     
@@ -96,11 +96,11 @@ class GameLayer: SKNode {
         while let newB = toVisit.pop() {
             var newArray = Array<Bomb> ()
             for v in adjacencyList[newB] {
-                if (!bombs[v].visited) {
-                    bombs[v].visited = true
+                if (!bombs[v.adjacentNumber].visited) {
+                    bombs[v.adjacentNumber].visited = true
                     //bombs[v].colorBlendFactor = 1
-                    newArray.append(bombs[v])
-                    toVisit.push(v)
+                    newArray.append(bombs[v.adjacentNumber])
+                    toVisit.push(v.adjacentNumber)
                 }
             }
             burstQueue.push(newArray)
@@ -114,12 +114,16 @@ class GameLayer: SKNode {
         for start in adjacencyList {
             for end in start {
                 let linePath = CGMutablePath()
-                linePath.addLines(between: [bombs[startIndex].position, bombs[end].position])
+                linePath.addLines(between: [bombs[startIndex].position, bombs[end.adjacentNumber].position])
                 let newLine = SKShapeNode(path: linePath)
                 newLine.strokeColor = .red
                 newLine.alpha = 0.3
-                self.addChild(newLine)
-                lines.append(newLine)
+                end.line = newLine
+                end.startPoint = bombs[startIndex].position
+                end.endPoint = bombs[end.adjacentNumber].position
+                self.addChild(end)
+                end.animateGraph()
+                //lines.append(newLine)
             }
             startIndex += 1
         }
