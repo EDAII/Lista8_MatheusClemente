@@ -10,12 +10,14 @@ import SpriteKit
 
 class GameLayer: SKNode {
     
+    let size: CGSize
     var bombs: Array<Bomb>
     var adjacencyList: Array<Array<Int>>
     var burstQueue: Queue<Array<Bomb>>
     var lines: Array<SKShapeNode>
     
     init(size: CGSize, level: Int) {
+        self.size = size
         bombs = Array()
         adjacencyList = Array(Array())
         burstQueue = Queue<Array<Bomb>>()
@@ -45,6 +47,13 @@ class GameLayer: SKNode {
             self.addChild(b)
         }
         
+        
+        //Botao de retorno
+        let returnButton = SKSpriteNode(texture: SKTexture(imageNamed: "backButton"), color: .clear, size: SKTexture(imageNamed: "backButton").size())
+        returnButton.setScale(0.05)
+        returnButton.position = CGPoint(x: size.width*0.9, y: size.height*0.9)
+        returnButton.name = "returnButton"
+        self.addChild(returnButton)
     
     }
     
@@ -57,24 +66,22 @@ class GameLayer: SKNode {
             for n in nodes(at: location) {
                 if let b = n as? Bomb {
                     bfs(statingVertice: b.number)
+                } else if n.name == "returnButton" {
+                    returnToMenu()
                 }
             }
         }
         
     }
     
-    //MARK: - Graph management
-    
-    func testGraph(){
-        for i in 0...9 {
-            adjacencyList.append(Array<Int>())
-            if i < 9 {
-                adjacencyList[i].append(i+1)
-            }
-        }
-        drawGraphLines()
+    func returnToMenu() {
+        let nextScene = MenuScene(size: self.size)
+        nextScene.scaleMode = .aspectFill
+        
+        self.scene?.view?.presentScene(nextScene)
     }
     
+    //MARK: - Graph management
     func bfs(statingVertice: Int) {
         for b in bombs {
             b.visited = false

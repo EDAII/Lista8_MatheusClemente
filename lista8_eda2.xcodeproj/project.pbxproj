@@ -19,6 +19,8 @@
 		CCBCC6A221B496AD00634959 /* Explosao.sks in Resources */ = {isa = PBXBuildFile; fileRef = CCBCC6A121B496AC00634959 /* Explosao.sks */; };
 		CCBCC6A421B4978A00634959 /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = CCBCC6A321B4978A00634959 /* fire.png */; };
 		CCBCC6A621B4AB3A00634959 /* LevelGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBCC6A521B4AB3A00634959 /* LevelGenerator.swift */; };
+		CCBCC6A821B4BBCC00634959 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBCC6A721B4BBCC00634959 /* MenuScene.swift */; };
+		CCBCC6AE21B4C2C700634959 /* backButton.png in Resources */ = {isa = PBXBuildFile; fileRef = CCBCC6AD21B4C2C700634959 /* backButton.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		CCBCC6A121B496AC00634959 /* Explosao.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosao.sks; sourceTree = "<group>"; };
 		CCBCC6A321B4978A00634959 /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire.png; sourceTree = "<group>"; };
 		CCBCC6A521B4AB3A00634959 /* LevelGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelGenerator.swift; sourceTree = "<group>"; };
+		CCBCC6A721B4BBCC00634959 /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
+		CCBCC6AD21B4C2C700634959 /* backButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backButton.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,8 +74,10 @@
 			children = (
 				CCBCC68321B429B900634959 /* AppDelegate.swift */,
 				CCBCC68921B429B900634959 /* GameScene.swift */,
+				CCBCC6A721B4BBCC00634959 /* MenuScene.swift */,
 				CCBCC69D21B4768500634959 /* GameLayer.swift */,
 				CCBCC6A521B4AB3A00634959 /* LevelGenerator.swift */,
+				CCBCC6AD21B4C2C700634959 /* backButton.png */,
 				CCBCC6A321B4978A00634959 /* fire.png */,
 				CCBCC68B21B429B900634959 /* GameViewController.swift */,
 				CCBCC6A121B496AC00634959 /* Explosao.sks */,
@@ -148,6 +154,7 @@
 				CCBCC6A221B496AD00634959 /* Explosao.sks in Resources */,
 				CCBCC69421B429BC00634959 /* LaunchScreen.storyboard in Resources */,
 				CCBCC6A421B4978A00634959 /* fire.png in Resources */,
+				CCBCC6AE21B4C2C700634959 /* backButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,6 +170,7 @@
 				CCBCC6A021B487D100634959 /* Queue.swift in Sources */,
 				CCBCC69E21B4768500634959 /* GameLayer.swift in Sources */,
 				CCBCC69C21B46F0700634959 /* Bomb.swift in Sources */,
+				CCBCC6A821B4BBCC00634959 /* MenuScene.swift in Sources */,
 				CCBCC68C21B429B900634959 /* GameViewController.swift in Sources */,
 				CCBCC68421B429B900634959 /* AppDelegate.swift in Sources */,
 			);

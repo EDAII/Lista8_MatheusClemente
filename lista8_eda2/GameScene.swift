@@ -13,8 +13,8 @@ class GameScene: SKScene {
     
     let gameLayer: GameLayer
     
-    override init(size: CGSize) {
-        self.gameLayer = GameLayer(size: size, level: 2)
+    init(size: CGSize, level: Int) {
+        self.gameLayer = GameLayer(size: size, level: level)
         
         super.init(size: size)
         
