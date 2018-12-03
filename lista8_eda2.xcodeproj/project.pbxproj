@@ -18,6 +18,7 @@
 		CCBCC6A021B487D100634959 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBCC69F21B487D100634959 /* Queue.swift */; };
 		CCBCC6A221B496AD00634959 /* Explosao.sks in Resources */ = {isa = PBXBuildFile; fileRef = CCBCC6A121B496AC00634959 /* Explosao.sks */; };
 		CCBCC6A421B4978A00634959 /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = CCBCC6A321B4978A00634959 /* fire.png */; };
+		CCBCC6A621B4AB3A00634959 /* LevelGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBCC6A521B4AB3A00634959 /* LevelGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		CCBCC69F21B487D100634959 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		CCBCC6A121B496AC00634959 /* Explosao.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosao.sks; sourceTree = "<group>"; };
 		CCBCC6A321B4978A00634959 /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire.png; sourceTree = "<group>"; };
+		CCBCC6A521B4AB3A00634959 /* LevelGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				CCBCC68321B429B900634959 /* AppDelegate.swift */,
 				CCBCC68921B429B900634959 /* GameScene.swift */,
 				CCBCC69D21B4768500634959 /* GameLayer.swift */,
+				CCBCC6A521B4AB3A00634959 /* LevelGenerator.swift */,
 				CCBCC6A321B4978A00634959 /* fire.png */,
 				CCBCC68B21B429B900634959 /* GameViewController.swift */,
 				CCBCC6A121B496AC00634959 /* Explosao.sks */,
@@ -155,6 +158,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCBCC6A621B4AB3A00634959 /* LevelGenerator.swift in Sources */,
 				CCBCC68A21B429B900634959 /* GameScene.swift in Sources */,
 				CCBCC6A021B487D100634959 /* Queue.swift in Sources */,
 				CCBCC69E21B4768500634959 /* GameLayer.swift in Sources */,

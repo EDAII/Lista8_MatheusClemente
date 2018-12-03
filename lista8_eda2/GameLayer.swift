@@ -12,26 +12,39 @@ class GameLayer: SKNode {
     
     var bombs: Array<Bomb>
     var adjacencyList: Array<Array<Int>>
-    var burstQueue: Queue<Bomb>
+    var burstQueue: Queue<Array<Bomb>>
+    var lines: Array<SKShapeNode>
     
-    init(size: CGSize) {
+    init(size: CGSize, level: Int) {
         bombs = Array()
         adjacencyList = Array(Array())
-        burstQueue = Queue<Bomb>()
-
+        burstQueue = Queue<Array<Bomb>>()
+        lines = [SKShapeNode]()
         
         super.init()
         
-        for i in 1...10 {
-            let box = Bomb()
-            box.position = CGPoint(x: size.width/2, y: ((size.height/11) * CGFloat(i)))
-            self.addChild(box)
-            bombs.append(box)
-            box.number = bombs.count - 1
+        isUserInteractionEnabled = true
+        
+        switch level {
+        case 0:
+            bombs = LevelGenerator.createBombs0(size: size)
+            adjacencyList = LevelGenerator.generateGraph0()
+        case 1:
+            bombs = LevelGenerator.createBombs1(size: size)
+            adjacencyList = LevelGenerator.generateGraph1()
+        case 2:
+            bombs = LevelGenerator.createBombs2(size: size)
+            adjacencyList = LevelGenerator.generateGraph2()
+        default:
+            break
         }
         
-        isUserInteractionEnabled = true
-        testGraph()
+        drawGraphLines()
+        
+        for b in bombs {
+            self.addChild(b)
+        }
+        
     
     }
     
@@ -59,6 +72,7 @@ class GameLayer: SKNode {
                 adjacencyList[i].append(i+1)
             }
         }
+        drawGraphLines()
     }
     
     func bfs(statingVertice: Int) {
@@ -70,27 +84,45 @@ class GameLayer: SKNode {
         toVisit.push(statingVertice)
         bombs[statingVertice].visited = true
         //bombs[statingVertice].colorBlendFactor = 1
-        burstQueue.push(bombs[statingVertice])
+        burstQueue.push(Array([bombs[statingVertice]]))
         
         while let newB = toVisit.pop() {
-        
+            var newArray = Array<Bomb> ()
             for v in adjacencyList[newB] {
                 if (!bombs[v].visited) {
                     bombs[v].visited = true
                     //bombs[v].colorBlendFactor = 1
-                    burstQueue.push(bombs[v])
-
+                    newArray.append(bombs[v])
                     toVisit.push(v)
                 }
             }
+            burstQueue.push(newArray)
         }
         
         burstChain()
     }
     
+    func drawGraphLines() {
+        var startIndex = 0
+        for start in adjacencyList {
+            for end in start {
+                let linePath = CGMutablePath()
+                linePath.addLines(between: [bombs[startIndex].position, bombs[end].position])
+                let newLine = SKShapeNode(path: linePath)
+                newLine.strokeColor = .red
+                newLine.alpha = 0.3
+                self.addChild(newLine)
+                lines.append(newLine)
+            }
+            startIndex += 1
+        }
+    }
+    
     func burstChain() {
-        if let b = burstQueue.pop() {
-            b.explode()
+        if let bs = burstQueue.pop() {
+            for b in bs {
+                b.explode()
+            }
         }
         print("BUMMM")
         run(SKAction.wait(forDuration: 0.5)) {
