@@ -15,9 +15,13 @@ class GraphLine: SKNode {
     var startPoint: CGPoint!
     var endPoint: CGPoint!
     
-    init(_ number: Int) {
+    var weight: Int
+    var wLabel: SKLabelNode?
+    
+    init(_ number: Int, weight: Int = 0) {
         self.adjacentNumber = number
         self.point = SKShapeNode(circleOfRadius: 3)
+        self.weight = weight
         
         super.init()
         
@@ -41,6 +45,22 @@ class GraphLine: SKNode {
         
         let movementLoop = SKAction.repeatForever(SKAction.sequence([reset, move]))
         point.run(movementLoop, withKey: "movementLoop")
+    }
+    
+    func setWeightLabel() {
+        self.wLabel = SKLabelNode(text: "\(self.weight)")
+        wLabel?.position = middleLinePoint()
+        wLabel?.fontColor = .white
+        wLabel?.fontSize = 22
+        
+        self.addChild(wLabel!)
+    }
+    
+    func middleLinePoint() -> CGPoint {
+        let newX = min(startPoint.x, endPoint.x) + abs((startPoint.x-endPoint.x)/2)
+        let newY = min(startPoint.y, endPoint.y) + abs((startPoint.y-endPoint.y)/2)
+
+        return CGPoint(x: newX, y: newY)
     }
     
 }

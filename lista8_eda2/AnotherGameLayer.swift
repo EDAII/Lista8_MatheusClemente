@@ -35,7 +35,7 @@ class AnotherGameLayer: SKNode {
         switch level {
         case 5:
             bombs = LevelGenerator.createBombsT(size: size)
-            adjacencyList = LevelGenerator.generateGraphT()
+            adjacencyList = LevelGenerator.generateGraphT(withWeight: true)
         default:
             break
         }
@@ -96,7 +96,10 @@ class AnotherGameLayer: SKNode {
                 end.endPoint = bombs[end.adjacentNumber].position
                 self.addChild(end)
                 end.animateGraph()
-                //lines.append(newLine)
+                
+                //Peso
+                end.setWeightLabel()
+                
             }
             startIndex += 1
         }
