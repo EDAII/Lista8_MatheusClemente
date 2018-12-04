@@ -17,6 +17,7 @@ class AnotherGameLayer: SKNode {
     var initialNode: Int
     var finalNode: Int
     var selectedNode: Int
+    var selectedPath: Path
     
     init(size: CGSize, level: Int) {
         self.size = size
@@ -25,8 +26,9 @@ class AnotherGameLayer: SKNode {
         lines = [SKShapeNode]()
         
         initialNode = 0
-        finalNode = 8
+        finalNode = 7
         selectedNode = 0
+        selectedPath = Path(to: initialNode)
         
         super.init()
         
@@ -113,9 +115,64 @@ class AnotherGameLayer: SKNode {
                 bombs[selectedNode].colorBlendFactor = 0.7
                 
                 conection.line.alpha = 1
+        
+                let newPath = Path(to: selectedNode, via: conection, previousPath: selectedPath)
+                self.selectedPath = newPath
+           
+                if selectedNode == finalNode {
+                    let bestPath = shortestPath(source: self.initialNode, destination: self.finalNode)
+                    print("\(bestPath?.cumulativeWeight)")
+                    print("\(selectedPath.cumulativeWeight)")
+                }
+                
                 return
             }
         }
+    }
+    
+    class Path {
+        public let cumulativeWeight: Int
+        public let node: Int
+        public let previousPath: Path?
+        
+        init(to node: Int, via line: GraphLine? = nil, previousPath path: Path? = nil) {
+            if
+                let previousPath = path,
+                let viaLine = line {
+                self.cumulativeWeight = viaLine.weight + previousPath.cumulativeWeight
+            } else {
+                self.cumulativeWeight = 0
+            }
+            
+            self.node = node
+            self.previousPath = path
+        }
+    }
+    
+    func shortestPath(source: Int, destination: Int) -> Path? {
+        
+        
+        var frontier: [Path] = [] {
+            didSet { frontier.sort { return $0.cumulativeWeight < $1.cumulativeWeight } } // the frontier has to be always ordered
+        }
+        
+        frontier.append(Path(to: source)) // the frontier is made by a path that starts nowhere and ends in the source
+        
+        while !frontier.isEmpty {
+            let cheapestPathInFrontier = frontier.removeFirst() // getting the cheapest path available
+            guard !bombs[cheapestPathInFrontier.node].visited else { continue } // making sure we haven't visited the node already
+            
+            if cheapestPathInFrontier.node == destination {
+                return cheapestPathInFrontier // found the cheapest path 😎
+            }
+            
+            bombs[cheapestPathInFrontier.node].visited = true
+            
+            for line in  adjacencyList[cheapestPathInFrontier.node] where !bombs[line.adjacentNumber].visited { // adding new paths to our frontier
+                frontier.append(Path(to: line.adjacentNumber, via: line, previousPath: cheapestPathInFrontier))
+            }
+        } // end while
+        return nil // we didn't find a path 😣
     }
     
 }
