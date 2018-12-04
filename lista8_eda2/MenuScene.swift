@@ -36,6 +36,16 @@ class MenuScene: SKScene {
             button.position = CGPoint(x: CGFloat(i) * size.width/4, y: size.height*0.7)
             self.addChild(button)
         }
+        
+        for i in 1...3 {
+            let button = MenuButton(n:i+2)
+            button.position = CGPoint(x: CGFloat(i) * size.width/4, y: size.height*0.5)
+            self.addChild(button)
+        }
+        
+      
+        
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

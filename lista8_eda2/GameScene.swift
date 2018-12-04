@@ -12,13 +12,19 @@ import GameplayKit
 class GameScene: SKScene {
     
     let gameLayer: GameLayer
+    let gameLayer2: AnotherGameLayer
     
     init(size: CGSize, level: Int) {
+        
         self.gameLayer = GameLayer(size: size, level: level)
+        self.gameLayer2 = AnotherGameLayer(size: size, level: level)
         
         super.init(size: size)
-        
-        addChild(gameLayer)
+        if level < 5 {
+            addChild(gameLayer)
+        } else {
+            addChild(gameLayer2)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

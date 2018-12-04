@@ -1,46 +1,39 @@
 //
-//  GameLayer.swift
+//  AnotherGameLayer.swift
 //  lista8_eda2
 //
-//  Created by Matheus Azevedo on 02/12/18.
+//  Created by Matheus Azevedo on 03/12/18.
 //  Copyright © 2018 Matheus Azevedo. All rights reserved.
 //
 
 import SpriteKit
 
-class GameLayer: SKNode {
-    
+class AnotherGameLayer: SKNode {
     let size: CGSize
     var bombs: Array<Bomb>
     var adjacencyList: Array<Array<GraphLine>>
-    var burstQueue: Queue<Array<Bomb>>
     var lines: Array<SKShapeNode>
+    
+    var initialNode: Int
+    var finalNode: Int
+    var selectedNode: Int
     
     init(size: CGSize, level: Int) {
         self.size = size
         bombs = Array()
         adjacencyList = Array(Array())
-        burstQueue = Queue<Array<Bomb>>()
         lines = [SKShapeNode]()
+        
+        initialNode = 0
+        finalNode = 8
+        selectedNode = 0
         
         super.init()
         
         isUserInteractionEnabled = true
         
         switch level {
-        case 0:
-            bombs = LevelGenerator.createBombs0(size: size)
-            adjacencyList = LevelGenerator.generateGraph0()
-        case 1:
-            bombs = LevelGenerator.createBombs1(size: size)
-            adjacencyList = LevelGenerator.generateGraph1()
-        case 2:
-            bombs = LevelGenerator.createBombs2(size: size)
-            adjacencyList = LevelGenerator.generateGraph2()
-        case 3:
-            bombs = LevelGenerator.createBombs3(size: size)
-            adjacencyList = LevelGenerator.generateGraph3()
-        case 4:
+        case 5:
             bombs = LevelGenerator.createBombsT(size: size)
             adjacencyList = LevelGenerator.generateGraphT()
         default:
@@ -52,7 +45,9 @@ class GameLayer: SKNode {
         for b in bombs {
             self.addChild(b)
         }
-        
+        //Destaca o node inicial
+        bombs[initialNode].color = .red
+        bombs[initialNode].colorBlendFactor = 0.7
         
         //Botao de retorno
         let returnButton = SKSpriteNode(texture: SKTexture(imageNamed: "backButton"), color: .clear, size: SKTexture(imageNamed: "backButton").size())
@@ -60,7 +55,7 @@ class GameLayer: SKNode {
         returnButton.position = CGPoint(x: size.width*0.9, y: size.height*0.97)
         returnButton.name = "returnButton"
         self.addChild(returnButton)
-    
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -71,7 +66,7 @@ class GameLayer: SKNode {
         if let location = touches.first?.location(in: self) {
             for n in nodes(at: location) {
                 if let b = n as? Bomb {
-                    bfs(statingVertice: b.number)
+                    tryToSelectRoute(to: b.number)
                 } else if n.name == "returnButton" {
                     returnToMenu()
                 }
@@ -85,33 +80,6 @@ class GameLayer: SKNode {
         nextScene.scaleMode = .aspectFill
         
         self.scene?.view?.presentScene(nextScene)
-    }
-    
-    //MARK: - Graph management
-    func bfs(statingVertice: Int) {
-        for b in bombs {
-            b.visited = false
-        }
-        
-        var toVisit = Queue<Int>()
-        toVisit.push(statingVertice)
-        bombs[statingVertice].visited = true
-        //bombs[statingVertice].colorBlendFactor = 1
-        burstQueue.push(Array([bombs[statingVertice]]))
-        
-        while let newB = toVisit.pop() {
-            var newArray = Array<Bomb> ()
-            for v in adjacencyList[newB] {
-                if (!bombs[v.adjacentNumber].visited) {
-                    bombs[v.adjacentNumber].visited = true
-                    newArray.append(bombs[v.adjacentNumber])
-                    toVisit.push(v.adjacentNumber)
-                }
-            }
-            burstQueue.push(newArray)
-        }
-        
-        burstChain()
     }
     
     func drawGraphLines() {
@@ -134,20 +102,17 @@ class GameLayer: SKNode {
         }
     }
     
-    func burstChain() {
-        if let bs = burstQueue.pop() {
-            for b in bs {
-                b.explode()
-                for l in adjacencyList[b.number] {
-                    l.alpha = 0 //Oculta a ligacao do grafo
-                }
-            }
-        }
-        print("BUMMM")
-        run(SKAction.wait(forDuration: 0.5)) {
-            if !self.burstQueue.isEmpty {
-                self.burstChain()
+    func tryToSelectRoute(to nodeNumber: Int){
+        for conection in adjacencyList[selectedNode] {
+            if nodeNumber == conection.adjacentNumber {
+                selectedNode = nodeNumber
+                bombs[selectedNode].color = .red
+                bombs[selectedNode].colorBlendFactor = 0.7
+                
+                conection.line.alpha = 1
+                return
             }
         }
     }
+    
 }
