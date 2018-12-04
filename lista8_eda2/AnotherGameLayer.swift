@@ -51,6 +51,10 @@ class AnotherGameLayer: SKNode {
         bombs[initialNode].color = .red
         bombs[initialNode].colorBlendFactor = 0.7
         
+        //Destaca o node final
+        bombs[finalNode].color = .blue
+        bombs[finalNode].colorBlendFactor = 0.7
+        
         //Botao de retorno
         let returnButton = SKSpriteNode(texture: SKTexture(imageNamed: "backButton"), color: .clear, size: SKTexture(imageNamed: "backButton").size())
         returnButton.setScale(0.05)
@@ -121,8 +125,16 @@ class AnotherGameLayer: SKNode {
            
                 if selectedNode == finalNode {
                     let bestPath = shortestPath(source: self.initialNode, destination: self.finalNode)
+                    
                     print("\(bestPath?.cumulativeWeight)")
                     print("\(selectedPath.cumulativeWeight)")
+                    
+                    if bestPath?.cumulativeWeight == selectedPath.cumulativeWeight {
+                        //Voce ganhou o jogo
+                        youWin()
+                    } else {
+                        //Voce perdeu
+                    }
                 }
                 
                 return
@@ -134,6 +146,7 @@ class AnotherGameLayer: SKNode {
         public let cumulativeWeight: Int
         public let node: Int
         public let previousPath: Path?
+        public let originLine: GraphLine?
         
         init(to node: Int, via line: GraphLine? = nil, previousPath path: Path? = nil) {
             if
@@ -146,6 +159,7 @@ class AnotherGameLayer: SKNode {
             
             self.node = node
             self.previousPath = path
+            self.originLine = line
         }
     }
     
@@ -175,4 +189,15 @@ class AnotherGameLayer: SKNode {
         return nil // we didn't find a path 😣
     }
     
+    
+    func youWin() {
+        trinPath(selectedPath)
+    }
+    private func trinPath(_ path: Path) {
+        bombs[path.node].color = .green
+        if path.originLine != nil {
+            path.originLine?.line.strokeColor = .green
+            trinPath(path.previousPath!)
+        }
+    }
 }
